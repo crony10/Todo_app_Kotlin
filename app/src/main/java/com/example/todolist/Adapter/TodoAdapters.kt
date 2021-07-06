@@ -15,26 +15,25 @@ class TodoAdapters(
     val todos: ArrayList<Todo>
 ): RecyclerView.Adapter<TodoAdapters.TodoViewHolder>() {
 
-    private lateinit var binding : ActivityListBinding
+//    private lateinit var binding : ActivityListBinding
 
     override fun getItemCount(): Int {
         return todos.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
-        val li  =  parent?.context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val itemView = li.inflate(R.layout.activity_list,parent,false)
-        return TodoViewHolder(itemView)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.activity_list, parent, false)
+
+        return TodoViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-
+        holder.tvTodoTask.text = todos[position].task
     }
 
 
     class TodoViewHolder(val item: View) : RecyclerView.ViewHolder(item){
-        fun bindView() {
-            val tvTodoTask = item.findViewById<TextView>(R.id.tvTodoTask)
-        }
+        val tvTodoTask = item.findViewById<TextView>(R.id.tvTodoTask)
     }
 }

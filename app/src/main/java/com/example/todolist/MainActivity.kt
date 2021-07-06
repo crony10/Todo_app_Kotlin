@@ -22,7 +22,14 @@ class MainActivity : AppCompatActivity() {
         todos.add(Todo("First Task",true))
 
         binding.rvTodos.layoutManager = LinearLayoutManager(this)
-        val todoAdapter: TodoAdapters = TodoAdapters(todos)
+        val todoAdapter = TodoAdapters(todos)
         binding.rvTodos.adapter = todoAdapter
+
+        // Setting up the add button
+        binding.btnAdd.setOnClickListener{
+            val newTodo = binding.etNewTask.text.toString()
+            todos.add(Todo(newTodo,false))
+            todoAdapter.notifyDataSetChanged()
+        }
     }
 }
